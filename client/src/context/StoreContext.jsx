@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { default_food_list } from "../assets/food_data";
 
 export const StoreContext = createContext(null);
 
 export const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const [food_list, setFoodList] = useState([]);
+  const [food_list, setFoodList] = useState(default_food_list);
   const [token, setToken] = useState("");
   const [user, setUser] = useState(null);
   const [toasts, setToasts] = useState([]);
@@ -136,11 +137,11 @@ export const StoreContextProvider = (props) => {
   const fetchFoodList = async () => {
     try {
       const response = await axios.get(`${url}/api/food/list`);
-      if (response.data.success) {
+      if (response.data && response.data.success && Array.isArray(response.data.data) && response.data.data.length > 0) {
         setFoodList(response.data.data);
       }
     } catch (err) {
-      console.error("Failed to load food list from backend:", err);
+      console.log("Serving built-in food menu dataset.");
     }
   };
 
