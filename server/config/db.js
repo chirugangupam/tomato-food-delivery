@@ -1,0 +1,594 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DATA_FILE = path.join(__dirname, '..', 'data', 'db.json');
+
+// Ensure data folder exists
+const dataDir = path.join(__dirname, '..', 'data');
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+
+// Initial food seed dataset inspired by GreatStack Food Delivery
+const initialFoods = [
+  {
+    _id: "1",
+    name: "Greek Salad",
+    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Crisp cucumbers, juicy tomatoes, kalamata olives, red onion, and creamy feta cheese dressed with oregano vinaigrette.",
+    category: "Salad",
+    rating: 4.8
+  },
+  {
+    _id: "2",
+    name: "Veg Salad",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80",
+    price: 180,
+    description: "Fresh garden mix featuring crisp greens, carrots, heirloom cherry tomatoes, roasted pumpkin seeds, and light citrus dressing.",
+    category: "Salad",
+    rating: 4.5
+  },
+  {
+    _id: "3",
+    name: "Clover Salad",
+    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80",
+    price: 160,
+    description: "Vibrant microgreens, avocado slices, quinoa, and spiced chickpeas tossed with herb-infused olive oil.",
+    category: "Salad",
+    rating: 4.9
+  },
+  {
+    _id: "4",
+    name: "Chicken Salad",
+    image: "https://images.unsplash.com/photo-1580013759032-c96505e24c1f?auto=format&fit=crop&w=600&q=80",
+    price: 240,
+    description: "Tender grilled herb chicken breast served over baby romaine, parmesan crisps, and zesty Caesar vinaigrette.",
+    category: "Salad",
+    rating: 4.7
+  },
+  {
+    _id: "5",
+    name: "Lasagna Rolls",
+    image: "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=600&q=80",
+    price: 140,
+    description: "Hand-rolled artisanal pasta filled with seasoned ricotta, spinach, and layered with slow-cooked marinara and mozzarella.",
+    category: "Rolls",
+    rating: 4.6
+  },
+  {
+    _id: "6",
+    name: "Peri Peri Rolls",
+    image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Spicy peri peri marinated fillings with charred bell peppers and signature tangy mayo wrapped in a toasted flatbread.",
+    category: "Rolls",
+    rating: 4.7
+  },
+  {
+    _id: "7",
+    name: "Chicken Rolls",
+    image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80",
+    price: 200,
+    description: "Succulent tandoori spiced chicken chunks rolled with pickled onions, mint chutney, and fluffy paratha.",
+    category: "Rolls",
+    rating: 4.9
+  },
+  {
+    _id: "8",
+    name: "Veggie Spring Rolls",
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    price: 150,
+    description: "Golden crispy pastry rolls stuffed with shredded vegetables, glass noodles, and served with sweet chili dip.",
+    category: "Rolls",
+    rating: 4.4
+  },
+  {
+    _id: "9",
+    name: "Ripple Ice Cream",
+    image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80",
+    price: 140,
+    description: "Velvety Madagascar vanilla bean gelato swirled with rich raspberry puree and dark chocolate ribbons.",
+    category: "Deserts",
+    rating: 4.8
+  },
+  {
+    _id: "10",
+    name: "Fruit Ice Cream",
+    image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80",
+    price: 220,
+    description: "Artisanal gelato loaded with freshly picked berries, passionfruit glaze, and crunchy almond praline.",
+    category: "Deserts",
+    rating: 4.9
+  },
+  {
+    _id: "11",
+    name: "Jar Ice Cream",
+    image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80",
+    price: 100,
+    description: "Layered gourmet dessert jar with crumble crust, silky cream, salted caramel, and Belgian chocolate flakes.",
+    category: "Deserts",
+    rating: 4.6
+  },
+  {
+    _id: "12",
+    name: "Vanilla Ice Cream",
+    image: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Classic creamy vanilla soft serve topped with waffle crisps, warm fudge sauce, and maraschino cherries.",
+    category: "Deserts",
+    rating: 4.5
+  },
+  {
+    _id: "13",
+    name: "Chicken Sandwich",
+    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Crispy buttermilk fried chicken breast, melted cheddar cheese, house slaw, and pickles on toasted brioche.",
+    category: "Sandwich",
+    rating: 4.8
+  },
+  {
+    _id: "14",
+    name: "Vegan Sandwich",
+    image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80",
+    price: 180,
+    description: "Smoked tofu, grilled zucchini, mashed avocado, sun-dried tomatoes, and pesto on toasted sourdough loaf.",
+    category: "Sandwich",
+    rating: 4.5
+  },
+  {
+    _id: "15",
+    name: "Grilled Sandwich",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
+    price: 160,
+    description: "Triple-cheese melt with caramelized onions, roasted garlic butter, and fresh basil leaves toasted to perfection.",
+    category: "Sandwich",
+    rating: 4.7
+  },
+  {
+    _id: "16",
+    name: "Bread Sandwich",
+    image: "https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=600&q=80",
+    price: 240,
+    description: "Multi-layered club sandwich with turkey bacon, egg salad, crisp lettuce, and heirloom tomatoes.",
+    category: "Sandwich",
+    rating: 4.6
+  },
+  {
+    _id: "17",
+    name: "Cup Cake",
+    image: "https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=600&q=80",
+    price: 140,
+    description: "Decadent red velvet cupcake with fluffy cream cheese swirl and Belgian chocolate shavings.",
+    category: "Cake",
+    rating: 4.7
+  },
+  {
+    _id: "18",
+    name: "Vegan Cake",
+    image: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Rich organic dark cocoa cake made with almond milk and topped with fresh strawberries.",
+    category: "Cake",
+    rating: 4.6
+  },
+  {
+    _id: "19",
+    name: "Butterscotch Cake",
+    image: "https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80",
+    price: 200,
+    description: "Sponge cake layered with butterscotch cream, crunchy praline nuggets, and golden toffee glaze.",
+    category: "Cake",
+    rating: 4.9
+  },
+  {
+    _id: "20",
+    name: "Sliced Cake",
+    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80",
+    price: 150,
+    description: "Moist layered vanilla cheesecake slice with wild blueberry reduction and buttery graham crust.",
+    category: "Cake",
+    rating: 4.8
+  },
+  {
+    _id: "21",
+    name: "Garlic Mushroom",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+    price: 140,
+    description: "Button mushrooms sautéed in garlic herb butter, flamed with white wine and sprinkled with parsley.",
+    category: "Pure Veg",
+    rating: 4.5
+  },
+  {
+    _id: "22",
+    name: "Fried Cauliflower",
+    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    price: 220,
+    description: "Crispy spiced cauliflower florets tossed in sweet and tangy chili sauce with sesame seeds.",
+    category: "Pure Veg",
+    rating: 4.7
+  },
+  {
+    _id: "23",
+    name: "Mix Veg Pulao",
+    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    price: 100,
+    description: "Fragrant basmati rice cooked with whole spices, seasonal vegetables, saffron, and roasted cashews.",
+    category: "Pure Veg",
+    rating: 4.8
+  },
+  {
+    _id: "24",
+    name: "Rice Zucchini",
+    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Wholesome jasmine rice stir-fried with tender zucchini ribbons, edamame, and tamari seasoning.",
+    category: "Pure Veg",
+    rating: 4.6
+  },
+  {
+    _id: "25",
+    name: "Cheese Pasta",
+    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Penne pasta baked in a four-cheese velvety sauce with gruyere, cheddar, mozzarella, and parmesan crumble.",
+    category: "Pasta",
+    rating: 4.9
+  },
+  {
+    _id: "26",
+    name: "Tomato Pasta",
+    image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281691?auto=format&fit=crop&w=600&q=80",
+    price: 180,
+    description: "Classic Italian rigatoni tossed in slow-simmered San Marzano tomato sauce, fresh basil, and extra virgin olive oil.",
+    category: "Pasta",
+    rating: 4.7
+  },
+  {
+    _id: "27",
+    name: "Creamy Pasta",
+    image: "https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=600&q=80",
+    price: 160,
+    description: "Fettuccine Alfredo tossed with roasted garlic, freshly grated parmesan, and cracked black pepper.",
+    category: "Pasta",
+    rating: 4.8
+  },
+  {
+    _id: "28",
+    name: "Chicken Pasta",
+    image: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80",
+    price: 240,
+    description: "Spaghetti tossed with blackened cajun chicken breast, sun-dried tomatoes, and creamy herb sauce.",
+    category: "Pasta",
+    rating: 4.9
+  },
+  {
+    _id: "29",
+    name: "Butter Noodles",
+    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
+    price: 140,
+    description: "Silky egg noodles tossed in browned garlic butter, chives, and toasted sesame seeds.",
+    category: "Noodles",
+    rating: 4.6
+  },
+  {
+    _id: "30",
+    name: "Veg Noodles",
+    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Hakka style wok-tossed noodles with shredded cabbage, bell peppers, carrots, and savory dark soy.",
+    category: "Noodles",
+    rating: 4.7
+  },
+  {
+    _id: "31",
+    name: "Somen Noodles",
+    image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+    price: 200,
+    description: "Japanese wheat noodles served chilled with dipping broth, scallions, grated ginger, and nori flakes.",
+    category: "Noodles",
+    rating: 4.8
+  },
+  {
+    _id: "32",
+    name: "Cooked Noodles",
+    image: "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80",
+    price: 150,
+    description: "Spicy Dan Dan ramen noodles topped with crispy chili oil, braised greens, and soft-boiled egg.",
+    category: "Noodles",
+    rating: 4.9
+  },
+  {
+    _id: "33",
+    name: "Hyderabadi Chicken Biryani",
+    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    price: 260,
+    description: "Rich aromatic basmati rice layered with tender marinated spiced chicken, saffron, caramelized onions, and fresh mint.",
+    category: "Biryani",
+    rating: 4.9
+  },
+  {
+    _id: "34",
+    name: "Paneer Tikka Biryani",
+    image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=600&q=80",
+    price: 220,
+    description: "Dum-cooked spiced basmati rice layered with chargrilled cottage cheese cubes, saffron, fried onions, and fresh mint.",
+    category: "Biryani",
+    rating: 4.8
+  },
+  {
+    _id: "35",
+    name: "Lucknowi Mutton Biryani",
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80",
+    price: 340,
+    description: "Melt-in-mouth tender lamb pieces infused with royal Awadhi spices, kewra essence, and fragrant long-grain rice.",
+    category: "Biryani",
+    rating: 4.9
+  },
+  {
+    _id: "36",
+    name: "Kolkata Egg Biryani",
+    image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?auto=format&fit=crop&w=600&q=80",
+    price: 180,
+    description: "Fragrant saffron rice cooked with spiced hard-boiled eggs, golden fried potatoes, and subtle mild aromatics.",
+    category: "Biryani",
+    rating: 4.7
+  },
+  {
+    _id: "37",
+    name: "Margherita Supreme Pizza",
+    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+    price: 220,
+    description: "Classic stone-baked crust topped with rich San Marzano tomato sauce, fresh mozzarella, extra virgin olive oil, and basil.",
+    category: "Pizza",
+    rating: 4.8
+  },
+  {
+    _id: "38",
+    name: "Farmhouse Veggie Pizza",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    price: 280,
+    description: "Loaded with crunchy bell peppers, sweet golden corn, sliced black olives, red onions, button mushrooms, and mozzarella.",
+    category: "Pizza",
+    rating: 4.7
+  },
+  {
+    _id: "39",
+    name: "Paneer Makhani Pizza",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+    price: 290,
+    description: "Fusion pizza topped with marinated tandoori paneer tikka, capsicum, red paprika, and rich makhani sauce drizzle.",
+    category: "Pizza",
+    rating: 4.9
+  },
+  {
+    _id: "40",
+    name: "BBQ Smoked Chicken Pizza",
+    image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=600&q=80",
+    price: 320,
+    description: "Tender shredded barbecue chicken, sliced red onions, pickled jalapenos, and mozzarella on a golden hand-tossed crust.",
+    category: "Pizza",
+    rating: 4.8
+  },
+  {
+    _id: "41",
+    name: "Crispy Veggie Crunch Burger",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
+    price: 130,
+    description: "Golden spiced potato and pea patty topped with crisp lettuce, sliced tomatoes, pickled gherkins, and tangy house sauce.",
+    category: "Burger",
+    rating: 4.6
+  },
+  {
+    _id: "42",
+    name: "Double Cheese Smash Burger",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    price: 240,
+    description: "Dual grilled juicy patties layered with double molten cheddar, caramelized onions, and secret gourmet burger relish.",
+    category: "Burger",
+    rating: 4.9
+  },
+  {
+    _id: "43",
+    name: "Spicy Paneer Zinger Burger",
+    image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80",
+    price: 180,
+    description: "Crispy battered spiced paneer steak with crunchy purple cabbage slaw and peri peri mayo on a toasted brioche bun.",
+    category: "Burger",
+    rating: 4.8
+  },
+  {
+    _id: "44",
+    name: "Crispy Chicken Supreme Burger",
+    image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=600&q=80",
+    price: 210,
+    description: "Crunchy buttermilk fried chicken breast, melted cheddar cheese, fresh iceberg lettuce, and smoky garlic aioli.",
+    category: "Burger",
+    rating: 4.8
+  },
+  {
+    _id: "45",
+    name: "Crispy Butter Masala Dosa",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    price: 140,
+    description: "Golden crisp fermented crepe stuffed with spiced potato masala, served with coconut chutney, tomato dip, and hot sambar.",
+    category: "South Indian",
+    rating: 4.9
+  },
+  {
+    _id: "46",
+    name: "Ghee Podi Button Idli",
+    image: "https://images.unsplash.com/photo-1589301760576-47f4f5a34bb2?auto=format&fit=crop&w=600&q=80",
+    price: 120,
+    description: "Mini steamed rice cakes generously tossed in aromatic spicy gun powder (podi) and pure desi ghee.",
+    category: "South Indian",
+    rating: 4.8
+  },
+  {
+    _id: "47",
+    name: "Mysore Masala Dosa",
+    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    price: 160,
+    description: "Signature crispy dosa lined with fiery garlic-red chili chutney paste and filled with traditional potato sabzi.",
+    category: "South Indian",
+    rating: 4.9
+  },
+  {
+    _id: "48",
+    name: "Medu Vada Sambar Combo",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    price: 110,
+    description: "Crispy golden lentil fritters crunchy on the outside, soft inside, served with hot drumstick sambar and fresh coconut dip.",
+    category: "South Indian",
+    rating: 4.7
+  },
+  {
+    _id: "49",
+    name: "Murgh Butter Chicken",
+    image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+    price: 290,
+    description: "Succulent tandoori chicken tikka simmered in a velvety, buttery tomato cashew gravy infused with kasuri methi.",
+    category: "North Indian",
+    rating: 4.9
+  },
+  {
+    _id: "50",
+    name: "Paneer Butter Masala",
+    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+    price: 240,
+    description: "Soft malai cottage cheese cubes in a rich, creamy, mild sweet and spiced tomato-butter cashew gravy.",
+    category: "North Indian",
+    rating: 4.8
+  },
+  {
+    _id: "51",
+    name: "Dal Makhani Amritsari",
+    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    price: 190,
+    description: "Slow-cooked black lentils simmered overnight with butter, dairy cream, and subtle smoky tandoori spices.",
+    category: "North Indian",
+    rating: 4.9
+  },
+  {
+    _id: "52",
+    name: "Garlic Butter Naan Basket",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80",
+    price: 90,
+    description: "Freshly baked clay-oven leavened flatbreads brushed with roasted garlic butter and chopped fresh coriander (3 pcs).",
+    category: "North Indian",
+    rating: 4.8
+  },
+  {
+    _id: "53",
+    name: "Steamed Veg Momos (6 Pcs)",
+    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=600&q=80",
+    price: 130,
+    description: "Delicate steamed Himalayan dumplings stuffed with finely minced vegetables, served with spicy schezwan garlic chutney.",
+    category: "Chinese",
+    rating: 4.8
+  },
+  {
+    _id: "54",
+    name: "Crispy Fried Chicken Momos",
+    image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=600&q=80",
+    price: 160,
+    description: "Golden crispy fried momos filled with juicy spiced minced chicken, served with mayonnaise and tangy hot dip.",
+    category: "Chinese",
+    rating: 4.9
+  },
+  {
+    _id: "55",
+    name: "Chilli Paneer Dry",
+    image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80",
+    price: 210,
+    description: "Crispy paneer cubes wok-tossed with crunchy bell peppers, spring onions, green chilies, and savory dark soy.",
+    category: "Chinese",
+    rating: 4.7
+  },
+  {
+    _id: "56",
+    name: "Veg Manchurian Gravy",
+    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
+    price: 180,
+    description: "Golden vegetable dumplings immersed in a savory, tangy, ginger-garlic soy broth garnished with scallions.",
+    category: "Chinese",
+    rating: 4.6
+  },
+  {
+    _id: "57",
+    name: "Kesari Mango Lassi",
+    image: "https://images.unsplash.com/photo-1571006687899-73fcf05a62e0?auto=format&fit=crop&w=600&q=80",
+    price: 110,
+    description: "Thick, creamy churned sweet yogurt blended with rich Alphonso mango pulp, saffron strands, and crushed pistachios.",
+    category: "Beverages",
+    rating: 4.9
+  },
+  {
+    _id: "58",
+    name: "Cold Coffee Frappe",
+    image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80",
+    price: 130,
+    description: "Chilled rich espresso blended with full-cream milk, dark chocolate drizzle, and vanilla ice cream scoop.",
+    category: "Beverages",
+    rating: 4.8
+  },
+  {
+    _id: "59",
+    name: "Masala Chai Flask (500ml)",
+    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80",
+    price: 90,
+    description: "Freshly brewed traditional Indian kadak milk tea infused with crushed cardamom, fresh ginger, and cinnamon.",
+    category: "Beverages",
+    rating: 4.9
+  },
+  {
+    _id: "60",
+    name: "Fresh Mint Lime Cooler",
+    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
+    price: 80,
+    description: "Refreshing sparkling soda infused with freshly squeezed lime juice, muddled mint leaves, and black rock salt.",
+    category: "Beverages",
+    rating: 4.7
+  }
+];
+
+class Database {
+  constructor() {
+    this.data = {
+      foods: [],
+      users: [],
+      orders: [],
+      carts: {} // { userId: { itemId: quantity } }
+    };
+    this.loadData();
+  }
+
+  loadData() {
+    try {
+      if (fs.existsSync(DATA_FILE)) {
+        const raw = fs.readFileSync(DATA_FILE, 'utf8');
+        this.data = JSON.parse(raw);
+      } else {
+        this.data.foods = [...initialFoods];
+        this.saveData();
+      }
+    } catch (err) {
+      console.error('Error loading DB file, fallback to initial foods:', err);
+      this.data.foods = [...initialFoods];
+    }
+  }
+
+  saveData() {
+    try {
+      fs.writeFileSync(DATA_FILE, JSON.stringify(this.data, null, 2), 'utf8');
+    } catch (err) {
+      console.error('Error saving DB file:', err);
+    }
+  }
+}
+
+export const db = new Database();

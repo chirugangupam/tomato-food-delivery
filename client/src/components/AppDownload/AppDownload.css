@@ -1,0 +1,229 @@
+.app-download {
+  margin: 60px auto 40px auto;
+  font-size: max(3vw, 20px);
+  text-align: left;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 50px 60px;
+  border-radius: var(--radius-lg);
+  color: #ffffff;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+}
+
+.app-download::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 76, 36, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.app-download-content {
+  max-width: 58%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 2;
+}
+
+.download-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 76, 36, 0.2);
+  border: 1px solid rgba(255, 76, 36, 0.4);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  color: #ff9800;
+  width: fit-content;
+}
+
+.app-download h2 {
+  font-size: max(2.5vw, 26px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ff4c24, #ff8c69);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.download-perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 6px 0 12px 0;
+}
+
+.download-perks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #cbd5e1;
+}
+
+.perk-icon {
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.app-download-platforms {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.store-badge-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.store-badge-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.store-icon {
+  font-size: 24px;
+}
+
+.store-btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-btn-text .small-text {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.store-btn-text .bold-text {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* Phone Mockup */
+.app-download-visual {
+  z-index: 2;
+  position: relative;
+}
+
+.phone-mockup {
+  width: 220px;
+  height: 280px;
+  background: #090d16;
+  border: 6px solid #334155;
+  border-radius: 30px;
+  padding: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  transform: rotate(-4deg);
+  transition: transform 0.3s ease;
+}
+
+.phone-mockup:hover {
+  transform: rotate(0deg) scale(1.04);
+}
+
+.phone-screen {
+  background: #1e293b;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.screen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.screen-card {
+  background: #0f172a;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.screen-card-tag {
+  font-size: 10px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.screen-card h4 {
+  font-size: 13px;
+  margin: 4px 0 8px 0;
+}
+
+.screen-progress {
+  width: 100%;
+  height: 6px;
+  background: #334155;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.screen-progress-bar {
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff4c24, #10b981);
+  border-radius: 3px;
+}
+
+.screen-eta {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+  .app-download {
+    flex-direction: column;
+    padding: 35px 25px;
+    gap: 30px;
+  }
+  .app-download-content {
+    max-width: 100%;
+  }
+  .app-download-visual {
+    display: none;
+  }
+}

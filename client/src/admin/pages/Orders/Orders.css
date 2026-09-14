@@ -1,0 +1,266 @@
+.admin-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.orders-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orders-page-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.orders-page-header p {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  color: #334155;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.refresh-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.order-item-card {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
+  align-items: start;
+  gap: 24px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.order-item-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.order-item-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-id-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-id-badge {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.order-timestamp {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.order-item-food-list {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+.order-item-customer-info {
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.order-customer-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.order-customer-address,
+.order-customer-phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #475569;
+}
+
+.inline-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+/* Meta */
+.order-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meta-sub {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.meta-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.meta-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.payment-status-badge span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.badge-cod {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-paid {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+/* Status Select */
+.order-item-status-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.order-item-status-control label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.status-select {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.status-select.food-processing {
+  background: #fffbeb;
+  border-color: #fcd34d;
+  color: #b45309;
+}
+
+.status-select.out-for-delivery {
+  background: #f0f9ff;
+  border-color: #7dd3fc;
+  color: #0369a1;
+}
+
+.status-select.delivered {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+.orders-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.empty-pkg-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+  .order-item-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

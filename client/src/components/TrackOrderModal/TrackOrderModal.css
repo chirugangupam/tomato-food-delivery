@@ -1,0 +1,306 @@
+.track-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.track-card {
+  position: relative;
+  z-index: 10;
+  width: max(38vw, 550px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.track-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.track-badge {
+  font-size: 11px;
+  background: #ffedd5;
+  color: #c2410c;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.track-header h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 4px;
+}
+
+.track-close {
+  color: #94a3b8;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.track-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Status Banner */
+.track-status-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.eta-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eta-icon {
+  color: var(--primary);
+}
+
+.eta-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.eta-time {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-pill.food-processing {
+  background: #fef3c7;
+  color: #b45309;
+}
+.status-pill.food-processing .status-dot {
+  background: #f59e0b;
+}
+
+.status-pill.out-for-delivery {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+.status-pill.out-for-delivery .status-dot {
+  background: #0ea5e9;
+}
+
+.status-pill.delivered {
+  background: #dcfce7;
+  color: #15803d;
+}
+.status-pill.delivered .status-dot {
+  background: #22c55e;
+}
+
+/* Stepper */
+.track-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 10px 0;
+  padding-left: 10px;
+}
+
+.step-node {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.step-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #e2e8f0;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.step-node.completed .step-icon-box {
+  background: #ecfdf5;
+  color: #10b981;
+  border-color: #10b981;
+}
+
+.step-node.current .step-icon-box {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.step-connector {
+  position: absolute;
+  top: 38px;
+  left: 18px;
+  width: 2px;
+  height: calc(100% - 16px);
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.step-connector.completed {
+  background: #10b981;
+}
+
+.step-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.step-info p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Details Grid */
+.track-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.track-sub-card {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sub-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.recipient-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.address-line {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.phone-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.items-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.item-mini-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #334155;
+}
+
+.item-mini-price {
+  font-weight: 600;
+}
+
+.track-total-row {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+}
+
+.bold-price {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+@media (max-width: 650px) {
+  .track-card {
+    width: 95%;
+    padding: 20px;
+  }
+  .track-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
