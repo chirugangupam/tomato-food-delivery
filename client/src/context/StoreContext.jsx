@@ -16,7 +16,7 @@ export const StoreContextProvider = (props) => {
   const [discountAmount, setDiscountAmount] = useState(0);
   const [activeOrderTrack, setActiveOrderTrack] = useState(null);
 
-  const url = "http://localhost:4000";
+  const url = import.meta.env.VITE_BACKEND_URL || (typeof window !== "undefined" && window.location.hostname !== "localhost" ? window.location.origin : "http://localhost:4000");
 
   // Toast Notification Trigger
   const addToast = (message, type = "info") => {

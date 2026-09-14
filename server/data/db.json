@@ -567,8 +567,7 @@
       "password": "$2a$10$sk8ERDuE7fM3B4tiFBbxgeW2DLHtom0hTYMT2tbZ.3Z9I7262H.ae",
       "role": "admin",
       "cartData": {
-        "3": 1,
-        "4": 1
+        "23": 1
       },
       "createdAt": "2026-09-13T13:54:25.959Z"
     }
@@ -607,8 +606,7 @@
   "carts": {
     "1789307231691": {},
     "1789307665959": {
-      "3": 1,
-      "4": 1
+      "23": 1
     }
   }
 }
